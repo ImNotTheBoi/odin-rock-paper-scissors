@@ -1,8 +1,3 @@
-let humanScore = 0;
-let computerScore = 0;
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
 function getComputerChoice() {
     const maxNumber = 3;
     const minNumber = 1;
@@ -19,7 +14,6 @@ function getComputerChoice() {
             computerChoice = "SCISSORS"
             break;
     }
-    console.log(computerChoice)
     return computerChoice
 }
 
@@ -27,7 +21,6 @@ function getHumanChoice() {
     let humanChoice = prompt("Rock, Paper or Scissors?");
     toString(humanChoice)
     humanChoice = humanChoice.toUpperCase()
-    console.log(humanChoice)
     if (humanChoice === "ROCK" || "PAPER" || "SCISSORS") {
         return humanChoice
     }
@@ -37,6 +30,9 @@ function getHumanChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
+    console.log(humanChoice)
+    console.log(computerChoice)
+    let roundCondition;
     if (humanChoice === computerChoice) {
         console.log(`Its a tie! Both choose ${humanChoice}`)
     }
@@ -44,36 +40,72 @@ function playRound(humanChoice, computerChoice) {
         switch (humanChoice) {
             case "ROCK":
                 if (computerChoice === "SCISSORS") {
-                    humanScore = humanScore++;
                     console.log(`You Win! ${humanChoice} beats ${computerChoice}`)
+                    roundCondition = "WON"
                 }
                 else {
-                    computerScore = computerScore++;
                     console.log(`You Lose! ${computerChoice} beats ${humanChoice}`)
+                    roundCondition = "LOST"
                 }
                 break;
             case "PAPER":
                 if (computerChoice === "ROCK") {
-                    humanScore = humanScore++;
                     console.log(`You Win! ${humanChoice} beats ${computerChoice}`)
+                    roundCondition = "WON"
                 }
                 else {
-                    computerScore = computerScore++;
                     console.log(`You Lose! ${computerChoice} beats ${humanChoice}`)
+                    roundCondition = "LOST"
                 }
                 break;
             case "SCISSORS":
                 if (computerChoice === "PAPER") {
-                    humanScore = humanScore++;
                     console.log(`You Win! ${humanChoice} beats ${computerChoice}`)
+                    roundCondition = "WON"
                 }
                 else {
-                    computerScore = computerScore++;
                     console.log(`You Lose! ${computerChoice} beats ${humanChoice}`)
+                    roundCondition = "LOST"
                 }
                 break;
+            default:
+                console.log(`${computerChoice} vs ${humanChoice} is invalid!`)
+        }
+    }
+    return roundCondition
+}
+
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+    while (true) {
+        let humanSelection = getHumanChoice();
+        let computerSelection = getComputerChoice();
+        round = playRound(humanSelection, computerSelection);
+        if (round === "WON") {
+            humanScore = ++humanScore;
+            if (humanScore === 3) {
+                console.log("You won the game!");
+                break;
+            }
+            else {
+                round = null;
+            }
+        }
+        else if (round === "LOST") {
+            computerScore = ++computerScore;
+                if (computerScore === 3) {
+                    console.log("You lost the game!");
+                    break;
+                }
+                else {
+                    round = null;
+                }
+        }
+        else {
+            round = null;
         }
     }
 }
 
-playRound(humanSelection, computerSelection);
+playGame();
