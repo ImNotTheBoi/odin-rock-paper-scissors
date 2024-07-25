@@ -1,15 +1,77 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #F0E9D2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header {
+    background-color: #181D31;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+#header-text {
+    color: #e5e7eb;
+    font-family: "Roboto", sans-serif;
+    font-size: larger;
+    font-weight: bold;
+}
+
+a {
+    color: #e5e7eb;
+    font-family: "Roboto", sans-serif;
+    font-size: medium;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    gap:16px
+}
+
 #scoreMenu {
-    background-color: #3882f6;
+    display: flex;
+    background-color: #678983;
     color: #e5e7eb;
     padding: 10px;
+    justify-content: center;
+    flex-grow: 1
+}
+
+#selectionMenu {
+    display: flex;
+    justify-content: space-around;
+    gap: 32px;
+    margin: auto;
+    margin-top: 32px;
+}
+
+#selectionMenu div {
+    font-size: 64px;
+    border-color: #678983;
+}
+
+#buttonMenu {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    gap: 12px;
 }
 
 button {
-    background-color: #3882f6;
+    background-color: #678983;
     color: #e5e7eb;
+    min-width: 100px;
     padding: 10px;
     border-radius: 12px;
     text-align: center;
-    max-width: 125px;
     font-weight: bold;
 }

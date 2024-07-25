@@ -2,6 +2,8 @@
 let humanScore = 0;
 let computerScore = 0;
 const scoreMenu = document.querySelector("#scoreMenu")
+const humanPick = document.querySelector("#humanPick")
+const computerPick = document.querySelector("#computerPick")
 
 // Selectors
 const rockButton = document.querySelector("#rockButton")
@@ -22,12 +24,15 @@ function getComputerChoice() {
     switch (randomNumber) {
         case 1:
             computerChoice = "ROCK"
+            computerPick.textContent = "🥌"
             break;
         case 2:
             computerChoice = "PAPER"
+            computerPick.textContent = "📰"
             break;
         case 3:
             computerChoice = "SCISSORS"
+            humanPick.textContent = "✀"
             break;
     }
     return computerChoice
@@ -39,11 +44,13 @@ function playRound(humanChoice, computerChoice) {
     let roundCondition;
     if (humanChoice === computerChoice) {
         console.log(`Its a tie! Both choose ${humanChoice}`)
+        humanPick.textContent = computerPick.textContent
         roundCondition = "TIE"
     }
     else {
         switch (humanChoice) {
             case "ROCK":
+                humanPick.textContent = "🥌"
                 if (computerChoice === "SCISSORS") {
                     console.log(`You Win! ${humanChoice} beats ${computerChoice}`)
                     roundCondition = "WON"
@@ -54,6 +61,7 @@ function playRound(humanChoice, computerChoice) {
                 }
                 break;
             case "PAPER":
+                humanPick.textContent = "📰"
                 if (computerChoice === "ROCK") {
                     console.log(`You Win! ${humanChoice} beats ${computerChoice}`)
                     roundCondition = "WON"
@@ -64,6 +72,7 @@ function playRound(humanChoice, computerChoice) {
                 }
                 break;
             case "SCISSORS":
+                humanPick.textContent = "✀"
                 if (computerChoice === "PAPER") {
                     console.log(`You Win! ${humanChoice} beats ${computerChoice}`)
                     roundCondition = "WON"
@@ -87,7 +96,7 @@ function playGame(humanChoice) {
     switch (round) {
         case "WON":
             ++humanScore;
-            `You won! ${humanScore} to ${computerScore}.`
+            scoreMenu.textContent = `You won! ${humanScore} to ${computerScore}.`
             break;
         case "LOST":
             ++computerScore;
@@ -103,8 +112,9 @@ function playGame(humanChoice) {
         computerScore = 0
     }
     else if (computerScore >= 3) {
-            scoreMenu.textContent = `You lost the game! ${humanScore} to ${computerScore}.`
-            humanScore = 0
-            computerScore = 0
+        scoreMenu.textContent = `You lost the game! ${humanScore} to ${computerScore}.`
+        humanScore = 0
+        computerScore = 0
     }
+       
 }
