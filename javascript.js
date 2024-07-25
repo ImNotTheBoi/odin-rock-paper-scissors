@@ -1,3 +1,19 @@
+// Variables
+let humanScore = 0;
+let computerScore = 0;
+const scoreMenu = document.querySelector("#scoreMenu")
+
+// Selectors
+const rockButton = document.querySelector("#rockButton")
+rockButton.addEventListener("click", () => playGame("ROCK"))
+
+const paperButton = document.querySelector("#paperButton")
+paperButton.addEventListener("click", () => playGame("PAPER"))
+
+const scissorsButton= document.querySelector("#scissorsButton")
+scissorsButton.addEventListener("click", () => playGame("SCISSORS"))
+
+// Functions
 function getComputerChoice() {
     const maxNumber = 3;
     const minNumber = 1;
@@ -17,24 +33,13 @@ function getComputerChoice() {
     return computerChoice
 }
 
-function getHumanChoice() {
-    let humanChoice = prompt("Rock, Paper or Scissors?");
-    toString(humanChoice)
-    humanChoice = humanChoice.toUpperCase()
-    if (humanChoice === "ROCK" || "PAPER" || "SCISSORS") {
-        return humanChoice
-    }
-    else {
-        return null
-    }
-}
-
 function playRound(humanChoice, computerChoice) {
     console.log(humanChoice)
     console.log(computerChoice)
     let roundCondition;
     if (humanChoice === computerChoice) {
         console.log(`Its a tie! Both choose ${humanChoice}`)
+        roundCondition = "TIE"
     }
     else {
         switch (humanChoice) {
@@ -75,37 +80,31 @@ function playRound(humanChoice, computerChoice) {
     return roundCondition
 }
 
-function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-    while (true) {
-        let humanSelection = getHumanChoice();
-        let computerSelection = getComputerChoice();
-        round = playRound(humanSelection, computerSelection);
-        if (round === "WON") {
-            humanScore = ++humanScore;
-            if (humanScore === 3) {
-                console.log("You won the game!");
-                break;
-            }
-            else {
-                round = null;
-            }
-        }
-        else if (round === "LOST") {
-            computerScore = ++computerScore;
-                if (computerScore === 3) {
-                    console.log("You lost the game!");
-                    break;
-                }
-                else {
-                    round = null;
-                }
-        }
-        else {
-            round = null;
-        }
+function playGame(humanChoice) {
+    let humanSelection = humanChoice
+    let computerSelection = getComputerChoice(); 
+    round = playRound(humanSelection, computerSelection);
+    switch (round) {
+        case "WON":
+            ++humanScore;
+            `You won! ${humanScore} to ${computerScore}.`
+            break;
+        case "LOST":
+            ++computerScore;
+            scoreMenu.textContent = `You lost! ${humanScore} to ${computerScore}.`
+            break;
+        case "TIE":
+            scoreMenu.textContent = `Its a tie! ${humanScore} to ${computerScore}.`
+            break;
+    }
+    if (humanScore >= 3) {
+        scoreMenu.textContent = `You won the game! ${humanScore} to ${computerScore}.`
+        humanScore = 0
+        computerScore = 0
+    }
+    else if (computerScore >= 3) {
+            scoreMenu.textContent = `You lost the game! ${humanScore} to ${computerScore}.`
+            humanScore = 0
+            computerScore = 0
     }
 }
-
-playGame();

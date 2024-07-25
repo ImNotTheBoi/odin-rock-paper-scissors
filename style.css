@@ -1,0 +1,15 @@
+#scoreMenu {
+    background-color: #3882f6;
+    color: #e5e7eb;
+    padding: 10px;
+}
+
+button {
+    background-color: #3882f6;
+    color: #e5e7eb;
+    padding: 10px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 125px;
+    font-weight: bold;
+}
